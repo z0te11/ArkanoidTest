@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5317813996523884648}
   - component: {fileID: 5317813996523884650}
   - component: {fileID: 5366010259435881857}
+  - component: {fileID: 2684767424515544279}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -117,7 +118,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.5
+  m_GravityScale: 0.2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -135,10 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2356d7c1a0d2e343905ed1bbf9d7f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _repulsionForce: 10
-  _acceleration: 2
+  _repulsionForce: 8
+  _acceleration: 0.5
   _isIncreaseFromPlayer: 1
-  _repulsionForceFromPlayer: 20
+  _repulsionForceFromPlayer: 12
   _rb: {fileID: 5317813996523884648}
 --- !u!114 &5366010259435881857
 MonoBehaviour:
@@ -152,3 +153,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6205a16806d3d6498fc32df5d380067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2684767424515544279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317813996523884655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da066389f7c5443489a974e8b1661704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 5317813996523884654}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2480925749661362649}
   - component: {fileID: 2480925749661362648}
   - component: {fileID: 950825956288105431}
+  - component: {fileID: 3610930206199492120}
   m_Layer: 0
   m_Name: EasyBlock
   m_TagString: Untagged
@@ -123,3 +124,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lives: 1
+  _score: 10
+--- !u!114 &3610930206199492120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480925749661362598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90df0fe72902c8a41bad10055efd07c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

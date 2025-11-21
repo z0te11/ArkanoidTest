@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 820983809078699576}
   - component: {fileID: 2774065126177384812}
   m_Layer: 0
-  m_Name: DontDestroyBlock
+  m_Name: UnKillableBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f267199ebfdbf647a55cc53a969eb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _score: 1

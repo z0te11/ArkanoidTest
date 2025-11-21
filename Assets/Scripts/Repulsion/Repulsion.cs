@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Repulsion : MonoBehaviour
+public class Repulsion : MonoBehaviour, IRepuler
 {
+    public event Action OnRepulsion;
+
     [Header("Settings Repulsion")]
     [SerializeField] private float _repulsionForce = 10f; 
     [SerializeField] private float _acceleration = 2f; 
@@ -53,6 +56,7 @@ public class Repulsion : MonoBehaviour
         Vector2 repulsionDirection = (transform.position - collision.transform.position).normalized;
 
         _rb.AddForce(repulsionDirection * newForce, ForceMode2D.Impulse);
+        OnRepulsion?.Invoke();
 
     }
 
@@ -63,25 +67,15 @@ public class Repulsion : MonoBehaviour
         Vector2 repulsionDirection = (transform.position - collision.transform.position).normalized;
 
         _rb.AddForce(repulsionDirection * _repulsionForce, ForceMode2D.Impulse);
+        OnRepulsion?.Invoke();
 
     }
 
-    private void ApplyTriggerRepulsion(Collider2D other)
-    {
-        if (_rb == null) return;
-
-        Vector2 repulsionDirection = (transform.position - other.transform.position).normalized;
-        
-        _rb.AddForce(repulsionDirection * _repulsionForce, ForceMode2D.Impulse);
-    }
-
-    // Метод для изменения силы отталкивания во время выполнения
     public void SetRepulsionForce(float newForce)
     {
         _repulsionForce = newForce;
     }
 
-    // Метод для изменения ускорения во время выполнения
     public void SetAcceleration(float newAcceleration)
     {
         _acceleration = newAcceleration;

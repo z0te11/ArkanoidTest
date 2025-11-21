@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed = 12f;
     [SerializeField] private float _swipeSensitivity = 2f;
     
-    private Camera _mainCamera;
-    private float _minX, _maxX;
-    private float _paddleHalfWidth;
+    private Camera _mainCamera = null;
+    private float _minX = 0, _maxX = 0;
+    private float _paddleHalfWidth = 0f;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
         CalculateBoundaries();
     }
 
-    void CalculateBoundaries()
+    private void CalculateBoundaries()
     {
         if (_mainCamera != null)
         {
