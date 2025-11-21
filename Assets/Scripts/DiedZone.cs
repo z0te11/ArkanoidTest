@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DiedZone : MonoBehaviour
+namespace GAMEPLAY
 {
-    private void OnTriggerEnter2D(Collider2D  other)
+    public class DiedZone : MonoBehaviour
     {
-        Debug.Log("DiedZone triggered by: " + other.gameObject.name);
-        
-        Ball ball = other.gameObject.GetComponent<Ball>();
-        if (ball != null)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Ball entered died zone!");
+            Debug.Log("DiedZone triggered by: " + other.gameObject.name);
             
-            GameManager.Instance.LoseGame();
+            Ball ball = other.gameObject.GetComponent<Ball>();
+            if (ball != null)
+            {
+                Debug.Log("Ball entered died zone!");
+                GameManager.Instance.LoseGame();
+            }
         }
     }
 }

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EasyBlock : Block, IInteract
+namespace GAMEPLAY
 {
-    public void InteractWithObject()
+    public class EasyBlock : Block, IInteract
     {
-        GetDamage();
+        public void InteractWithObject()
+        {
+            GetDamage();
+        }
     }
 }

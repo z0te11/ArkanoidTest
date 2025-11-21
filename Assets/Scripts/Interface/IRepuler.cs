@@ -1,6 +1,7 @@
-using System;
-
-interface IRepuler
+namespace GAMEPLAY
 {
-    event Action OnRepulsion;
+    public interface IRepuler
+    {
+        event System.Action OnRepulsion;
+    }
 }

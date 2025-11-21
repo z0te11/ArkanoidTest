@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-interface IScore
+namespace GAMEPLAY
 {
-    public int Score
+    public interface IScore
     {
-        get;
+        int Score
+        {
+            get;
+        }
+        
+        void GetScore(int score);
     }
-    public void GetScore(int score);
 }

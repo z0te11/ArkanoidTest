@@ -1,43 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager: MonoBehaviour
+namespace GAMEPLAY
 {
-    private int _score = 0;
-    public static ScoreManager Instance = null;
+    public class ScoreManager : MonoBehaviour
+    {
+        public static System.Action<int> ScoreChanged;
+        private int _score = 0;
+        public static ScoreManager Instance = null;
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
-    public int Score
-    {
-        get
+        private void Awake()
         {
-            return _score;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
-        set
+
+        public int Score
         {
-            _score = value;
+            get
+            {
+                return _score;
+            }
+            set
+            {
+                _score = value;
+                ScoreChanged?.Invoke(_score);
+            }
         }
-    }
 
-    private void Start()
-    {
-        Score = 0;
-    }
-
-    public void AddScore(int points)
-    {
-        if (points > 0)
+        private void Start()
         {
-            Score += points;
+            Score = 0;
         }
-    }
 
-    public void ResetScore()
-    {
-        Score = 0;
+        public void AddScore(int points)
+        {
+            if (points > 0)
+            {
+                Score += points;
+            }
+        }
+
+        public void ResetScore()
+        {
+            Score = 0;
+        }
     }
 }

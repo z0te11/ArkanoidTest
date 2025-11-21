@@ -1,66 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnSystem : MonoBehaviour
+namespace GAMEPLAY
 {
-    [SerializeField] private GameObject _easyBlock;
-    [SerializeField] private GameObject _midlBlock;
-    [SerializeField] private GameObject _hardBlock;
-    [SerializeField] private GameObject _ball;
-
-    public void SpawnEasyBlocks(int count)
+    public class SpawnSystem : MonoBehaviour
     {
-        for (int i = 0; i < count; i++)
+        [SerializeField] private GameObject _easyBlock;
+        [SerializeField] private GameObject _midlBlock;
+        [SerializeField] private GameObject _hardBlock;
+        [SerializeField] private GameObject _ball;
+
+        private float _currentSpawnHeight = 0f;
+        private const float ROW_HEIGHT = 0.8f;
+        private const float BLOCK_SPACING = 3f;
+        private const float START_X = -7.5f;
+
+        public void SpawnEasyBlocks(int count, int row)
         {
-            float newPos = -7.5f + 3f*i;
-            GameObject newEasyBlock = Instantiate(_easyBlock, new Vector3(newPos, 1f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newEasyBlock);
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    float newPosX = START_X + BLOCK_SPACING * i;
+                    float newPosY = _currentSpawnHeight + ROW_HEIGHT * j;
+                    GameObject newEasyBlock = Instantiate(_easyBlock, new Vector3(newPosX, newPosY, 0), Quaternion.identity);
+                    BlockManager.Instance.AddBlockInList(newEasyBlock);
+                }
+            }
+            
+            _currentSpawnHeight += ROW_HEIGHT * row;
         }
-        for (int i = 0; i < count - 1; i++)
+
+        public void SpawnMidlBlocks(int count, int row)
         {
-            float newPos = -5.5f + 3f*i;
-            GameObject newEasyBlock = Instantiate(_easyBlock, new Vector3(newPos, 0.3f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newEasyBlock);
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    float newPosX = START_X + BLOCK_SPACING * i;
+                    float newPosY = _currentSpawnHeight + ROW_HEIGHT * j;
+                    GameObject newMidlBlock = Instantiate(_midlBlock, new Vector3(newPosX, newPosY, 0), Quaternion.identity);
+                    BlockManager.Instance.AddBlockInList(newMidlBlock);
+                }
+            }
+            
+            _currentSpawnHeight += ROW_HEIGHT * row;
+        }
+
+        public void SpawnHardBlocks(int count, int row)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    float newPosX = START_X + BLOCK_SPACING * i;
+                    float newPosY = _currentSpawnHeight + ROW_HEIGHT * j;
+                    GameObject newHardBlock = Instantiate(_hardBlock, new Vector3(newPosX, newPosY, 0), Quaternion.identity);
+                    BlockManager.Instance.AddBlockInList(newHardBlock);
+                }
+            }
+            
+            _currentSpawnHeight += ROW_HEIGHT * row;
+        }
+
+        public void SpawnBall()
+        {
+            GameObject newBall = Instantiate(_ball, _ball.transform.position, Quaternion.identity);
+        }
+
+        public void ResetSpawnHeight()
+        {
+            _currentSpawnHeight = 0f;
         }
     }
-
-    public void SpawnMidlBlocks(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            float newPos = -7.5f + 3f*i;
-            GameObject newEasyBlock = Instantiate(_midlBlock, new Vector3(newPos, 1.5f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newEasyBlock);
-        }
-        for (int i = 0; i < count - 1; i++)
-        {
-            float newPos = -5.5f + 3f*i;
-            GameObject newEasyBlock = Instantiate(_midlBlock, new Vector3(newPos, 2.2f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newEasyBlock);
-        }
-    }
-
-    public void SpawnHardBlocks(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            float newPos = -7.5f + 3f*i;
-            GameObject newHardBlock = Instantiate(_hardBlock, new Vector3(newPos, 3f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newHardBlock);
-        }
-        for (int i = 0; i < count - 1; i++)
-        {
-            float newPos = -5.5f + 3f*i;
-            GameObject newHardBlock = Instantiate(_hardBlock, new Vector3(newPos, 4.2f, 0), Quaternion.identity);
-            BlockManager.Instance.AddBlockInList(newHardBlock);
-        }
-    }
-
-    public void SpawnBall()
-    {
-        GameObject newBall = Instantiate(_ball, _ball.transform.position, Quaternion.identity);
-    }
-
-
 }

@@ -1,7 +1,8 @@
-using System;
-
-interface ISound
+namespace GAMEPLAY
 {
-    event Action OnRepulsion;
-    event Action OnDestroyed;
+    public interface ISound
+    {
+        event System.Action OnRepulsion;
+        event System.Action OnDestroyed;
+    }
 }

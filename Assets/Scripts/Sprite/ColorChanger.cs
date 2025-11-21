@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorChanger : MonoBehaviour
+namespace GAMEPLAY
 {
-    [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private IRepuler _IRepulsion;
-
-    private void Awake()
+    public class ColorChanger : MonoBehaviour
     {
-        _IRepulsion = GetComponent<IRepuler>();
-    }
+        [SerializeField] private SpriteRenderer _sprite;
+        
+        private IRepuler _iRepulsion;
 
-    private void OnEnable()
-    {
-        _IRepulsion.OnRepulsion += ChangeColor;
-    }
+        private void Awake()
+        {
+            _iRepulsion = GetComponent<IRepuler>();
+        }
 
-    private void OnDisable()
-    {
-        _IRepulsion.OnRepulsion -= ChangeColor;
-    }
+        private void OnEnable()
+        {
+            _iRepulsion.OnRepulsion += ChangeColor;
+        }
 
-    private void ChangeColor()
-    {
-        _sprite.color = new Color(Random.Range(0.2f,1f),Random.Range(0.2f,1f),Random.Range(0.2f,1f));
+        private void OnDisable()
+        {
+            _iRepulsion.OnRepulsion -= ChangeColor;
+        }
+
+        private void ChangeColor()
+        {
+            _sprite.color = new Color(Random.Range(0.2f, 1f), Random.Range(0.2f, 1f), Random.Range(0.2f, 1f));
+        }
     }
 }

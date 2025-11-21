@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class CameraScaler : MonoBehaviour
+namespace GAMEPLAY
 {
-    public float baseSize = 5f; // Размер камеры для разрешения 1080
-
-    private void Awake()
+    public class CameraScaler : MonoBehaviour
     {
-        ScaleCamera();
-    }
+        [SerializeField] private float _baseSize = 5f;
 
-    private void ScaleCamera()
-    {
-        Camera cam = GetComponent<Camera>();
-        
-        // Простое масштабирование относительно высоты экрана
-        float screenHeight = Screen.height;
-        cam.orthographicSize = baseSize * (1080f/ screenHeight);
+        private void Awake()
+        {
+            ScaleCamera();
+        }
+
+        private void ScaleCamera()
+        {
+            Camera cam = GetComponent<Camera>();
+            float screenHeight = Screen.height;
+            cam.orthographicSize = _baseSize * (1080f / screenHeight);
+        }
     }
 }

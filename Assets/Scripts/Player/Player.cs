@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace GAMEPLAY
 {
-
+    public class Player : MonoBehaviour
+    {
+        // Player component will be implemented here
+    }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4702852878086958262}
   - component: {fileID: 5230642676095415835}
   - component: {fileID: -5370556498212022884}
+  - component: {fileID: -6511545733636880933}
   m_Layer: 0
   m_Name: MIddleBlock
   m_TagString: Untagged
@@ -123,7 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e468b1f518b21e47becb003eb7e83a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lives: 3
+  _animator: {fileID: -6511545733636880933}
+  _lives: 2
   _score: 10
 --- !u!114 &-5370556498212022884
 MonoBehaviour:
@@ -137,3 +139,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90df0fe72902c8a41bad10055efd07c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-6511545733636880933
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702852878086958280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4dc56236c68449d438b2c5e09d473416, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

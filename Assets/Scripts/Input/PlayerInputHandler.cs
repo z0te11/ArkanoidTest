@@ -1,53 +1,56 @@
 using UnityEngine;
 
-public class PlayerInputHandler : MonoBehaviour
+namespace GAMEPLAY
 {
-    [SerializeField] private PlayerMovement _playerMove;
-    [SerializeField] private UserInputSystem _userInput;
-
-    private float _deadZone = 0.01f;
-
-    private Vector2 _startTouchPosition;
-
-    void Start()
+    public class PlayerInputHandler : MonoBehaviour
     {
-        if (_userInput != null)
+        [SerializeField] private PlayerMovement _playerMove;
+        [SerializeField] private UserInputSystem _userInput;
+
+        private float _deadZone = 0.01f;
+        private Vector2 _startTouchPosition;
+
+        private void Start()
         {
-            _userInput.OnSwipe.AddListener(HandleSwipe);
-            _userInput.OnTouchStart.AddListener(OnTouchStarted);
+            if (_userInput != null)
+            {
+                _userInput.OnSwipe.AddListener(HandleSwipe);
+                _userInput.OnTouchStart.AddListener(OnTouchStarted);
+            }
+            else
+            {
+                Debug.LogError("UserInputSystem not found!");
+            }
         }
-        else
+
+        private void OnTouchStarted()
         {
-            Debug.LogError("UserInputSystem not found!");
+            _startTouchPosition = _userInput.GetStartTouchPosition();
         }
-    }
 
-    void OnTouchStarted()
-    {
-        _startTouchPosition = _userInput.GetStartTouchPosition();
-    }
-
-    void HandleSwipe(Vector2 currentPosition)
-    {
-        if (_playerMove == null) return;
-
-        float deltaX = (currentPosition.x - _startTouchPosition.x) / Screen.width;
-        
-        if (Mathf.Abs(deltaX) > _deadZone)
+        private void HandleSwipe(Vector2 currentPosition)
         {
-            _playerMove.ProcessSwipe(currentPosition, _startTouchPosition);
+            if (_playerMove == null)
+            {
+                return;
+            }
+
+            float deltaX = (currentPosition.x - _startTouchPosition.x) / Screen.width;
             
-            _startTouchPosition = currentPosition;
+            if (Mathf.Abs(deltaX) > _deadZone)
+            {
+                _playerMove.ProcessSwipe(currentPosition, _startTouchPosition);
+                _startTouchPosition = currentPosition;
+            }
         }
-    }
 
-    void OnDestroy()
-    {
-        // Отписываемся от событий
-        if (_userInput != null)
+        private void OnDestroy()
         {
-            _userInput.OnSwipe.RemoveListener(HandleSwipe);
-            _userInput.OnTouchStart.RemoveListener(OnTouchStarted);
+            if (_userInput != null)
+            {
+                _userInput.OnSwipe.RemoveListener(HandleSwipe);
+                _userInput.OnTouchStart.RemoveListener(OnTouchStarted);
+            }
         }
     }
 }

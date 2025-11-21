@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-interface IInteract
+namespace GAMEPLAY
 {
-    public void InteractWithObject();
+    public interface IInteract
+    {
+        void InteractWithObject();
+    }
 }

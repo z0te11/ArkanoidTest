@@ -1,26 +1,36 @@
 using UnityEngine;
 
-public class AudioBlockController : MonoBehaviour
+namespace GAMEPLAY
 {
-    private ISound _Isound;
+    public class AudioBlockController : MonoBehaviour
+    {
+        private ISound _iSound;
 
-    private void Awake()
-    {
-        _Isound = GetComponent<ISound>();
-    }
-    private void OnEnable()
-    {
-        _Isound.OnRepulsion += CallSoundRepulsion;
-        _Isound.OnDestroyed += CallSoundDestroy;
-    }
+        private void Awake()
+        {
+            _iSound = GetComponent<ISound>();
+        }
 
-    private void CallSoundRepulsion()
-    {
-        AudioManager.Instance.PlayAudioRepulsion();
-    }
+        private void OnEnable()
+        {
+            _iSound.OnRepulsion += CallSoundRepulsion;
+            _iSound.OnDestroyed += CallSoundDestroy;
+        }
 
-    private void CallSoundDestroy()
-    {
-        AudioManager.Instance.PlayDestroySound();
+        private void OnDisable()
+        {
+            _iSound.OnRepulsion -= CallSoundRepulsion;
+            _iSound.OnDestroyed -= CallSoundDestroy;
+        }
+
+        private void CallSoundRepulsion()
+        {
+            AudioManager.Instance.PlayAudioRepulsion();
+        }
+
+        private void CallSoundDestroy()
+        {
+            AudioManager.Instance.PlayDestroySound();
+        }
     }
 }

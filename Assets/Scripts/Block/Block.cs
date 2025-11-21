@@ -1,42 +1,57 @@
-using System;
 using UnityEngine;
 
-public class Block : MonoBehaviour, IScore, ISound
+namespace GAMEPLAY
 {
-    public event Action OnRepulsion;
-    public event Action OnDestroyed;
-    [SerializeField] private int _lives = 5;
-    [SerializeField] private int _score = 10;
-    public int Score
+    public class Block : MonoBehaviour, IScore, ISound
     {
-        get
+        public event System.Action OnRepulsion;
+        public event System.Action OnDestroyed;
+        
+        [SerializeField] private Animator _animator; 
+        [SerializeField] private int _lives = 5;
+        [SerializeField] private int _score = 10;
+        
+        public int Score
         {
-            return _score;
+            get
+            {
+                return _score;
+            }
         }
-    }
-    public void GetScore(int score)
-    {
-        ScoreManager.Instance.AddScore(score);
-    }
-    
-    protected void GetDamage()
-    {
-        _lives -= 1;
-        if (_lives <= 0)
+        
+        public void GetScore(int score)
         {
-            DestroyGameObject();
+            ScoreManager.Instance.AddScore(score);
         }
-        else
+        
+        protected void GetDamage()
         {
-            OnRepulsion?.Invoke();
-        }
-    }
+            _lives -= 1;
 
-    protected void DestroyGameObject()
-    {
-        GetScore(Score);
-        BlockManager.Instance.RemoveBlockFromList(this.gameObject);
-        OnDestroyed?.Invoke();
-        Destroy(gameObject);
+            if (_lives <= 0)
+            {
+                DestroyGameObject();
+            }
+            else
+            {
+                OnRepulsion?.Invoke();
+            }
+        }
+
+        protected void DestroyGameObject()
+        {
+            GetScore(Score);
+
+            _animator.Play("BlockDestroy");
+
+            BlockManager.Instance.RemoveBlockFromList(this.gameObject);
+
+            OnDestroyed?.Invoke();
+
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            float animationLength = stateInfo.length;
+
+            Destroy(gameObject, animationLength);
+        }
     }
 }

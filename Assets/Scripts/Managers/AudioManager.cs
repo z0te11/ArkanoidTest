@@ -1,33 +1,40 @@
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace GAMEPLAY
 {
-    [Header("Audio Clips")]
-    [SerializeField] AudioClip _audioDestroy;
-    [SerializeField] AudioClip _audioRepulsion;
-
-    [Header("Audio Source")]
-    [SerializeField] AudioSource _audioSource;
-    public static AudioManager Instance = null;
-
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-    }
+        [Header("Audio Clips")]
+        [SerializeField] private AudioClip _audioDestroy;
+        [SerializeField] private AudioClip _audioRepulsion;
 
-    public void PlayDestroySound()
-    {
-        if (_audioDestroy != null)
+        [Header("Audio Source")]
+        [SerializeField] private AudioSource _audioSource;
+        
+        public static AudioManager Instance = null;
+
+        private void Awake()
         {
-            _audioSource.PlayOneShot(_audioDestroy, 0.5f);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
-    }
 
-    public void PlayAudioRepulsion()
-    {
-        if (_audioRepulsion != null)
+        public void PlayDestroySound()
         {
-            _audioSource.PlayOneShot(_audioRepulsion, 0.5f);
-        }        
+            if (_audioDestroy != null)
+            {
+                _audioSource.PlayOneShot(_audioDestroy, 0.5f);
+            }
+        }
+
+        public void PlayAudioRepulsion()
+        {
+            if (_audioRepulsion != null)
+            {
+                _audioSource.PlayOneShot(_audioRepulsion, 0.5f);
+            }
+        }
     }
 }
